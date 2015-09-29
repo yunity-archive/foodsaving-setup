@@ -1,0 +1,6 @@
+[submodule "yunity-core"]
+	path = yunity-core
+	url = git@github.com:yunity/yunity-core.git
+[submodule "yunity-webapp"]
+	path = yunity-webapp
+	url = git@github.com:yunity/yunity-webapp.git
