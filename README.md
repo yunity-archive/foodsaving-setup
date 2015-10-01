@@ -5,6 +5,12 @@ This is the entry point to the other repos, it has:
 - some make tasks for doing some setup/update
 - a pm2 configuration for running the services in development
 
+## install system deps
+```
+Ubuntu / Debian
+sudo apt-get install gcc libffi-dev redis-server elasticsearch python3 python-dev python-virtualenv
+```
+
 ## Quick start
 
 ```
