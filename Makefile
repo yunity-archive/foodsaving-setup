@@ -38,7 +38,7 @@ yunity-core/env:
 
 npm-deps:
 	@echo $@
-	@sudo npm install -g bower webpack
+	@sudo npm install -g bower webpack pm2
 
 npm-link:
 	@echo $@
