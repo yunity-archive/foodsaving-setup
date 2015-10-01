@@ -1,0 +1,25 @@
+{
+  "name": "yunity",
+  "version": "0.0.1",
+  "description": "This is the parent repo for all the projects. It's in progress right now, but soon this wlil be the one to check out to get started on the project.",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunity/yunity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yunity/yunity/issues"
+  },
+  "homepage": "https://github.com/yunity/yunity#readme",
+  "dependencies": {
+    "http-proxy": "^1.11.2"
+  },
+  "devDependencies": {
+    "autobahn": "^0.9.6"
+  }
+}
