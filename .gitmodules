@@ -7,3 +7,6 @@
 [submodule "yunity-webapp-mobile"]
 	path = yunity-webapp-mobile
 	url = git@github.com:yunity/yunity-webapp-mobile.git
+[submodule "yunity-webapp-common"]
+	path = yunity-webapp-common
+	url = git@github.com:yunity/yunity-webapp-common.git
