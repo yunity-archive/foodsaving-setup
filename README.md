@@ -23,6 +23,20 @@ You must first install:
 sudo apt-get install gcc libffi-dev redis-server elasticsearch python3 python-dev python-virtualenv
 ```
 
+### postgresql 9.4 in Ubuntu >= 14.10
+
+```sh
+sudo apt-get install postgresql
+```
+
+### postgresql 9.4 in Ubuntu 14.04 and lower
+
+```sh
+deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update && sudo apt-get install postgresql-9.4
+```
+
 ## Quick start
 
 ```sh
