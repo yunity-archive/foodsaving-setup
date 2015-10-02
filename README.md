@@ -1,26 +1,35 @@
 # yunity
 
-This is the entry point to the other repos, it has:
-- git submodules for the individual projects
-- some make tasks for doing some setup/update
-- a pm2 configuration for running the services in development
+This provides scripts to get the app up and running. The primary purpose is for developers to get up and running easily.
 
-## install system deps
+It helps you to:
+- clone the seperate repos
+- install/configure the application dependencies
+- create the db/user and run the migations
+- run the application using pm2
+
+## Install system deps
+
+You must first install:
+- python3/virtualenv
+- node/npm (should work with 0.12.x and 4.x)
+- postgresql >9.4
+- redis-server
+- elasticsearch
+
+### Ubuntu / Debian
+
 ```sh
-Ubuntu / Debian
 sudo apt-get install gcc libffi-dev redis-server elasticsearch python3 python-dev python-virtualenv
 ```
 
 ## Quick start
 
 ```sh
-git clone git@github.com:yunity/yunity.git
-cd yunity
-make setup
+git clone git@github.com:yunity/yunity-setup.git
+cd yunity-setup
 make
 ```
-
-(the second call to `make` should be temporary, for some reason webpack doesn't build correctly first time round)
 
 To start all the services run:
 
@@ -30,25 +39,19 @@ pm2 start pm2.json
 
 (You can stop individual services like `pm2 stop django`)
 
-Please create an issue if this doesn't work out the box for you, this is only the first iteration :)
-
-## Initial setup
-
-To do initial setup run:
+You can view status of the processes:
 
 ```sh
-make setup
+pm2 list
 ```
 
-This will:
-- checkout the git submodules
-- install all the python/npm/bower dependencies
-- run the django migrations
+... and control them by name, for example if you want to run django from your IDE, you can run:
 
-It expects all __system__ things to be already installed:
-- postgresql
-- redis
-- elasticsearch
+```sh
+pm2 stop django
+```
+
+Please create an issue if this doesn't work out the box for you, this is only the first iteration :)
 
 ## Updating
 
@@ -58,6 +61,8 @@ If you just want to generally update everything, you can run:
 make
 ```
 
+It is designed to run idempotently.
+
 ## add git hook for update common files automaticly
 
 ```sh
@@ -65,11 +70,16 @@ cp ./yunity-webapp-common/scripts/post-merge ./.git/modules/yunity-webapp-common
 chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
 ```
 
-## maybe error
+## Errors
+
+You might have this error with django/python/crossbar:
+
 ```sh
 crossbar-3 (err): pkg_resources.DistributionNotFound: The 'cryptography>=0.7' distribution was not found and is required by pyOpenSSL
 ```
+
 if you get this kind of error message go into the yunity-core repository and force reinstall the requirements
+
 
 ```sh
 cd yunity-core
