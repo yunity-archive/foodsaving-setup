@@ -6,14 +6,14 @@ This is the entry point to the other repos, it has:
 - a pm2 configuration for running the services in development
 
 ## install system deps
-```
+```sh
 Ubuntu / Debian
 sudo apt-get install gcc libffi-dev redis-server elasticsearch python3 python-dev python-virtualenv
 ```
 
 ## Quick start
 
-```
+```sh
 git clone git@github.com:yunity/yunity.git
 cd yunity
 make setup
@@ -24,7 +24,7 @@ make
 
 To start all the services run:
 
-```
+```sh
 pm2 start pm2.json
 ```
 
@@ -36,7 +36,7 @@ Please create an issue if this doesn't work out the box for you, this is only th
 
 To do initial setup run:
 
-```
+```sh
 make setup
 ```
 
@@ -54,6 +54,25 @@ It expects all __system__ things to be already installed:
 
 If you just want to generally update everything, you can run:
 
-```
+```sh
 make
+```
+
+## add git hook for update common files automaticly
+
+```sh
+cp ./yunity-webapp-common/scripts/post-merge ./.git/modules/yunity-webapp-common/hooks/
+chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
+```
+
+## maybe error
+```sh
+crossbar-3 (err): pkg_resources.DistributionNotFound: The 'cryptography>=0.7' distribution was not found and is required by pyOpenSSL
+```
+if you get this kind of error message go into the yunity-core repository and force reinstall the requirements
+
+```sh
+cd yunity-core
+./env/bin/pip install --force-reinstall --ignore-installed -r requirements.pip
+pm2 restart all
 ```
