@@ -65,3 +65,17 @@ httpMobile.on('upgrade', function (req, socket, head) {
 
 httpMobile.listen(8091);
 
+/*
+
+  handle errors
+
+*/
+
+
+proxy.on('error', function(err, req, res){
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+  res.end('error during proxy call - ' + err);
+});
+
