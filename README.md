@@ -84,6 +84,16 @@ cp ./yunity-webapp-common/scripts/post-merge ./.git/modules/yunity-webapp-common
 chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
 ```
 
+## Custom virtualenv location
+
+If you're using virtualenvwrapper or just want your virtualenv to be in a special location, first create a symlink and it will use that one, e.g.:
+
+```
+cd yunity-core
+rm -rf env # if present
+ln -s ~/.envs/yunity-core env
+```
+
 ## Errors
 
 You might have this error with django/python/crossbar:
