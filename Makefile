@@ -96,3 +96,4 @@ npm-deps:
 	@which npm-cache || sudo npm install -g npm-cache
 	@which bower || sudo npm install -g bower
 	@which pm2 || sudo npm install -g pm2
+	@npm-cache install npm
