@@ -24,15 +24,13 @@
       "cwd": "yunity-webapp-mobile"
     },
     {
-      "name": "crossbar",
-      "script": "env/bin/crossbar",
+      "name": "sockets",
+      "script": "index.js",
       "args": [
-        "start"
+        "-w", "8080",
+        "-p", "9080"
       ],
-      "exec_interpreter": "env/bin/python",
-      "exec_mode": "fork_mode",
-      "treekill": false,
-      "cwd": "yunity-core"
+      "cwd": "yunity-sockets"
     },
     {
       "name": "django",

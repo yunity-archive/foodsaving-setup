@@ -1,12 +1,16 @@
 
 # all yunity-* projects
-project_dirs = yunity-core yunity-webapp-common yunity-webapp yunity-webapp-mobile
+project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yunity-webapp-mobile
 
-.PHONY: setup setup-core setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
+.PHONY: setup setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
 
-setup: setup-core setup-webapp-common setup-webapp setup-webapp-mobile
+setup: setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile
 
 setup-core: | yunity-core init-db pip-install django-migrate
+
+setup-sockets: | yunity-sockets
+	@echo && echo "# $@" && echo
+	@cd yunity-sockets && npm-cache install npm
 
 setup-webapp-common: | yunity-webapp-common npm-deps
 	@echo && echo "# $@" && echo
