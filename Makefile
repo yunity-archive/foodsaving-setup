@@ -1,5 +1,14 @@
 
+# settings
+
+pg_user = postgres
+
+# override settings, optionally
+
+-include local_settings.make
+
 # all yunity-* projects
+
 project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yunity-webapp-mobile
 
 .PHONY: setup setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
@@ -62,8 +71,14 @@ git-pull:
 
 init-db:
 	@echo && echo "# $@" && echo
-	@psql -U postgres postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='yunity-user'" | grep -q 1 || createuser -U postgres -s yunity-user
-	@psql -U postgres postgres -tAc "SELECT 1 FROM pg_database WHERE datname = 'yunity-database'" | grep -q 1 || createdb -U postgres yunity-database
+	@psql -U $(pg_user) postgres -tAc \
+		"SELECT 1 FROM pg_roles WHERE rolname='yunity-user'" | grep -q 1 || \
+		createuser -U $(pg_user) -s yunity-user || \
+		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
+	@psql -U $(pg_user) postgres -tAc \
+		"SELECT 1 FROM pg_database WHERE datname = 'yunity-database'" | grep -q 1 || \
+		createdb -U $(pg_user) yunity-database || \
+		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
 
 # copy default dev local_settings.py with db details for django
 
