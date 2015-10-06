@@ -1,4 +1,4 @@
-# yunity
+# yunity-setup
 
 This provides scripts to get the app up and running. The primary purpose is for developers to get up and running easily.
 
@@ -56,6 +56,31 @@ To start all the services run:
 ```sh
 pm2 start pm2.json
 ```
+
+The proxy serves up the following endpoints you can visit:
+
+URL                             | Purpose
+--------------------------------|------------------------------------------------------------
+http://localhost:8090/          | webapp served here
+http://localhost:8090/api       | django api endpoint
+http://localhost:8090/socket    | yunity-sockets socket.io endpoint
+http://localhost:8090/socket.io | webapp webpack-dev-server socket.io endpoint
+http://localhost:8091/          | mobile webapp served here
+http://localhost:8091/api       | django api endpoint
+http://localhost:8091/socket    | yunity-sockets socket.io endpoint
+http://localhost:8091/socket.io | mobile webapp webpack-dev-server socket.io endpoint
+
+This should be everything you need to hit, but for debugging you might want to hit endpoints directly (and also http://localhost:9080 to see which clients are connected to yunity-sockets)
+
+You should end up with the following services running:
+
+Name    | URL                                                                       | Purpose
+--------|---------------------------------------------------------------------------|--------------------------------
+proxy   | see table above | frontend server to serve for all endpoints (would be nginx in production)
+web     | http://localhost:8083                                                     | webpack-dev-server serving up webapp  
+mobile  | http://localhost:8084                                                     | webpack-dev-server serving up webapp mobile
+sockets | http://localhost:8080 (socket.io) and http://localhost:9080 (admin api)   | nodejs/socket.io server managing socket.io connections from frontends
+django  | http://localhost:8000                                                     | django application
 
 (You can stop individual services like `pm2 stop django`)
 
