@@ -40,8 +40,8 @@ sudo apt-get update && sudo apt-get install postgresql-9.4 postgresql-server-dev
 ## Quick start
 
 ```sh
-git clone git@github.com:yunity/yunity-setup.git
-cd yunity-setup
+git clone git@github.com:yunity/yunity-setup.git yunity
+cd yunity
 make
 ```
 
