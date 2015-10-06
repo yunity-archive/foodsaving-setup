@@ -3,7 +3,7 @@
 This provides scripts to get the app up and running. The primary purpose is for developers to get up and running easily. Please create an issue if this doesn't work out the box for you, it's a work in progress :)
 
 It helps you to:
-- provide information on how to install system dependencies
+- understand how to install system dependencies (information only)
 - clone the seperate repos
 - setup the application dependencies
 - setup the database and run the migrations
