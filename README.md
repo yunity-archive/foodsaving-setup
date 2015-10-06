@@ -84,6 +84,13 @@ cp ./yunity-webapp-common/scripts/post-merge ./.git/modules/yunity-webapp-common
 chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
 ```
 
+## Custom settings
+
+The setup script is intended to work in many unix-y environments but you might have some setup differences, you can set some options in `local_settings.make`:
+
+||Name||Meaning||Example||
+|pg_user|Which postgres role to use (in commands like `pgsql -U <pg_user>`)|pg_user=mycustomuser|
+
 ## Custom virtualenv location
 
 If you're using virtualenvwrapper or just want your virtualenv to be in a special location, first create a symlink and it will use that one, e.g.:
