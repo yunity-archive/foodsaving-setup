@@ -75,7 +75,13 @@ If you just want to generally update everything, you can run:
 make
 ```
 
-It is designed to run idempotently.
+It runs idempotently and should always be safe to run.
+
+This won't run any `git pull` commands, if you want this too, run:
+
+```sh
+make git-pull setup
+```
 
 ## add git hook for update common files automaticly
 
