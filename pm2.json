@@ -9,9 +9,9 @@
       "script": "node_modules/.bin/webpack-dev-server",
       "args": [
         "src/_entry.js",
-        "--inline",
         "--content-base", "www",
-        "--port", "8083"
+        "--port", "8083",
+        "--inline"
       ],
       "cwd": "yunity-webapp"
     },
@@ -19,7 +19,8 @@
       "name": "mobile",
       "script": "node_modules/.bin/webpack-dev-server",
       "args": [
-        "--port", "8084"
+        "--port", "8084",
+        "--inline"
       ],
       "cwd": "yunity-webapp-mobile"
     },

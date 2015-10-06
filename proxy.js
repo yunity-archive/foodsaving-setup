@@ -1,6 +1,6 @@
 var DJANGO_BACKEND = 'http://localhost:8000';
 var SOCKETIO_SERVER = 'http://localhost:8080';
-var SOCKETIO_PATH_RE = /^\/socket\.io/;
+var SOCKETIO_PATH_RE = /^\/socket\//;
 var WEBAPP_SERVER = 'http://localhost:8083';
 var MOBILE_SERVER = 'http://localhost:8084';
 
@@ -32,8 +32,12 @@ var httpWeb = http.createServer(function(req, res) {
 });
 
 httpWeb.on('upgrade', function (req, socket, head) {
-  console.log('ws upgrade web');
-  proxy.ws(req, socket, head, { target: SOCKETIO_SERVER });
+  console.log('ws upgrade web', req.url);
+  if (SOCKETIO_PATH_RE.test(req.url)) {
+    proxy.ws(req, socket, head, { target: SOCKETIO_SERVER });
+  } else {
+    proxy.ws(req, socket, head, { target: WEBAPP_SERVER });
+  }
 });
 
 httpWeb.listen(8090);
@@ -59,8 +63,12 @@ var httpMobile = http.createServer(function(req, res) {
 });
 
 httpMobile.on('upgrade', function (req, socket, head) {
-  console.log('ws upgrade mobile');
-  proxy.ws(req, socket, head, { target: SOCKETIO_SERVER });
+  console.log('ws upgrade mobile', req.url);
+  if (SOCKETIO_PATH_RE.test(req.url)) {
+    proxy.ws(req, socket, head, { target: SOCKETIO_SERVER });
+  } else {
+    proxy.ws(req, socket, head, { target: MOBILE_SERVER });
+  }
 });
 
 httpMobile.listen(8091);
