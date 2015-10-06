@@ -57,6 +57,10 @@ To start all the services run:
 pm2 start pm2.json
 ```
 
+Then visit http://localhost:8090 to see the webapp and http://localhost:8091 for the mobile webapp.
+
+## Endpoints
+
 The proxy serves up the following endpoints you can visit:
 
 URL                             | Purpose
