@@ -88,8 +88,9 @@ chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
 
 The setup script is intended to work in many unix-y environments but you might have some setup differences, you can set some options in `local_settings.make`:
 
-||Name||Meaning||Example||
-|pg_user|Which postgres role to use (in commands like `pgsql -U <pg_user>`)|pg_user=mycustomuser|
+Name     | Meaning                                                                | Example
+---------|------------------------------------------------------------------------|-----------------------------
+pg_user  | Which postgres role to use (in commands like `psql -U <pg_user>`)     | pg_user=mycustomuser
 
 ## Custom virtualenv location
 
