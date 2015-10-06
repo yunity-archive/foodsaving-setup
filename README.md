@@ -17,19 +17,25 @@ You must first install:
 - redis-server
 - elasticsearch
 
+You can check __some__ of the dependencies are present with:
+
+```
+make check-deps
+```
+
 ### Ubuntu / Debian
 
 ```sh
 sudo apt-get install gcc libffi-dev redis-server elasticsearch python3 python-dev python-virtualenv
 ```
 
-### postgresql 9.4 in Ubuntu >= 14.10
+#### postgresql 9.4 in Ubuntu >= 14.10
 
 ```sh
 sudo apt-get install postgresql postgresql-server-dev-9.4
 ```
 
-### postgresql 9.4 in Ubuntu 14.04 and lower
+#### postgresql 9.4 in Ubuntu 14.04 and lower
 
 ```sh
 deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
@@ -83,7 +89,7 @@ This won't run any `git pull` commands, if you want this too, run:
 make git-pull setup
 ```
 
-## add git hook for update common files automaticly
+## Add git hook to update common files automatically
 
 ```sh
 cp ./yunity-webapp-common/scripts/post-merge ./.git/modules/yunity-webapp-common/hooks/
