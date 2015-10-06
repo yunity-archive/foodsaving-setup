@@ -1,12 +1,13 @@
 # yunity-setup
 
-This provides scripts to get the app up and running. The primary purpose is for developers to get up and running easily.
+This provides scripts to get the app up and running. The primary purpose is for developers to get up and running easily. Please create an issue if this doesn't work out the box for you, it's a work in progress :)
 
 It helps you to:
+- provide information on how to install system dependencies
 - clone the seperate repos
-- install/configure the application dependencies
-- create the db/user and run the migations
-- run the application using pm2
+- setup the application dependencies
+- setup the database and run the migrations
+- run/manage the application's processes using pm2
 
 ## Install system deps
 
@@ -86,8 +87,6 @@ mobile  | http://localhost:8084                                                 
 sockets | http://localhost:8080 (socket.io) and http://localhost:9080 (admin api)   | nodejs/socket.io server managing socket.io connections from frontends
 django  | http://localhost:8000                                                     | django application
 
-(You can stop individual services like `pm2 stop django`)
-
 You can view status of the processes:
 
 ```sh
@@ -99,8 +98,6 @@ pm2 list
 ```sh
 pm2 stop django
 ```
-
-Please create an issue if this doesn't work out the box for you, this is only the first iteration :)
 
 ## Updating
 
