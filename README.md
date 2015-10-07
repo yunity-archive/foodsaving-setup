@@ -30,6 +30,12 @@ make check-deps
 sudo apt-get install gcc libffi-dev redis-server elasticsearch python3 python-dev python-virtualenv
 ```
 
+### Make elasticsearch bin accessable in Ubuntu / Debian
+
+```sh
+sudo ln -s /usr/share/elasticsearch/bin/elasticsearch /usr/local/bin/elasticsearch
+```
+
 #### postgresql 9.4 in Ubuntu >= 14.10
 
 ```sh
