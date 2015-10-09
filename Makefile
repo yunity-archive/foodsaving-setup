@@ -82,9 +82,9 @@ init-db:
 
 # copy default dev local_settings.py with db details for django
 
-yunity-core/wuppdays/local_settings.py:
+yunity-core/config/local_settings.py:
 	@echo && echo "# $@" && echo
-	@cp local_settings.py.dev-default yunity-core/wuppdays/local_settings.py
+	@cp local_settings.py.dev-default yunity-core/config/local_settings.py
 
 # pip install env
 
@@ -94,7 +94,7 @@ pip-install: yunity-core/env
 
 # migrate django
 
-django-migrate: yunity-core/env yunity-core/wuppdays/local_settings.py init-db
+django-migrate: yunity-core/env yunity-core/config/local_settings.py init-db
 	@echo && echo "# $@" && echo
 	@cd yunity-core && env/bin/python manage.py migrate
 
