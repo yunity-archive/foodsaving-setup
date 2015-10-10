@@ -62,6 +62,7 @@ git-clone: $(project_dirs)
 
 git-pull:
 	@echo && echo "# $@" && echo
+	@git pull
 	@for dir in $(project_dirs); do \
 		echo "git pulling $$dir"; \
 		cd $$dir && git pull; cd -; \
