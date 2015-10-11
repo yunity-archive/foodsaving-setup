@@ -70,28 +70,28 @@ Then visit http://localhost:8090 to see the webapp and http://localhost:8091 for
 
 The proxy serves up the following endpoints you can visit:
 
-URL                             | Purpose
---------------------------------|------------------------------------------------------------
-http://localhost:8090/          | webapp served here
-http://localhost:8090/api       | django api endpoint
-http://localhost:8090/socket    | yunity-sockets socket.io endpoint
-http://localhost:8090/socket.io | webapp webpack-dev-server socket.io endpoint
-http://localhost:8091/          | mobile webapp served here
-http://localhost:8091/api       | django api endpoint
-http://localhost:8091/socket    | yunity-sockets socket.io endpoint
-http://localhost:8091/socket.io | mobile webapp webpack-dev-server socket.io endpoint
+URL                                                         | Purpose
+------------------------------------------------------------|----------------------------------------------
+[localhost:8090/](http://localhost:8090/)                   | webapp served here
+[localhost:8090/api](http://localhost:8090/api)             | django api endpoint
+[localhost:8090/socket](http://localhost:8090/socket)       | yunity-sockets socket.io endpoint
+[localhost:8090/socket.io](http://localhost:8090/socket.io) | webapp webpack-dev-server socket.io endpoint
+[localhost:8091/](http://localhost:8091/)                   | mobile webapp served here
+[localhost:8091/api](http://localhost:8091/api)             | django api endpoint
+[localhost:8091/socket](http://localhost:8091/socket)       | yunity-sockets socket.io endpoint
+[localhost:8091/socket.io](http://localhost:8091/socket.io) | mobile webapp webpack-dev-server socket.io endpoint
 
-This should be everything you need to hit, but for debugging you might want to hit endpoints directly (and also http://localhost:9080 to see which clients are connected to yunity-sockets)
+This should be everything you need to hit, but for debugging you might want to hit endpoints directly (and also [localhost:9080](http://localhost:9080) to see which clients are connected to yunity-sockets)
 
 You should end up with the following services running:
 
 Name    | URL                                                                       | Purpose
 --------|---------------------------------------------------------------------------|--------------------------------
 proxy   | see table above | frontend server to serve for all endpoints (would be nginx in production)
-web     | http://localhost:8083                                                     | webpack-dev-server serving up webapp  
-mobile  | http://localhost:8084                                                     | webpack-dev-server serving up webapp mobile
-sockets | http://localhost:8080 (socket.io) and http://localhost:9080 (admin api)   | nodejs/socket.io server managing socket.io connections from frontends
-django  | http://localhost:8000                                                     | django application
+web     | [localhost:8083](http://localhost:8083)                                   | webpack-dev-server serving up webapp  
+mobile  | [localhost:8084](http://localhost:8084)                                   | webpack-dev-server serving up webapp mobile
+sockets | [localhost:8080](http://localhost:8080) (socket.io) and [localhost:9080](http://localhost:9080) (admin api)   | nodejs/socket.io server managing socket.io connections from frontends
+django  | [localhost:8000](http://localhost:8000)                                   | django application
 
 You can view status of the processes:
 
