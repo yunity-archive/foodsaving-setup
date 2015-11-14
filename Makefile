@@ -3,6 +3,15 @@
 
 pg_user = postgres
 
+# $(1) will be replaced with a postgres tool (psql|createuser|createdb)
+# you can override this in local_settings.make so make it use "sudo -u ", etc....
+
+pg = $(1) -U $(pg_user)
+
+PSQL = $(call pg,psql)
+CREATEDB = $(call pg,createdb)
+CREATEUSER = $(call pg,createuser)
+
 # override settings, optionally
 
 -include local_settings.make
@@ -72,13 +81,13 @@ git-pull:
 
 init-db:
 	@echo && echo "# $@" && echo
-	@psql -U $(pg_user) postgres -tAc \
+	@$(PSQL) -U $(pg_user) postgres -tAc \
 		"SELECT 1 FROM pg_roles WHERE rolname='yunity-user'" | grep -q 1 || \
-		createuser -U $(pg_user) -s yunity-user || \
+		$(CREATEUSER) -U $(pg_user) -s yunity-user || \
 		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
-	@psql -U $(pg_user) postgres -tAc \
+	@$(PSQL) -U $(pg_user) postgres -tAc \
 		"SELECT 1 FROM pg_database WHERE datname = 'yunity-database'" | grep -q 1 || \
-		createdb -U $(pg_user) yunity-database || \
+		$(CREATEDB) -U $(pg_user) yunity-database || \
 		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
 
 # copy default dev local_settings.py with db details for django
