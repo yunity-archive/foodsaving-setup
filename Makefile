@@ -12,6 +12,8 @@ PSQL = $(call pg,psql)
 CREATEDB = $(call pg,createdb)
 CREATEUSER = $(call pg,createuser)
 
+git_url_base = git@github.com:yunity/
+
 # override settings, optionally
 
 -include local_settings.make
@@ -60,7 +62,7 @@ check-deps:
 
 $(project_dirs):
 	@echo && echo "# $@" && echo
-	@git clone git@github.com:yunity/$@.git
+	@git clone $(git_url_base)$@.git
 
 # git clone all projects
 
