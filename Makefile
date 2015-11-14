@@ -38,14 +38,16 @@ setup-webapp-common: | yunity-webapp-common npm-deps npm-system-deps
 
 setup-webapp: | yunity-webapp-common yunity-webapp npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-webapp && npm-cache install bower npm
+	@cd yunity-webapp && npm-cache install npm
+	@cd yunity-webapp && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp/node_modules/yunity-webapp-common
 	@cd yunity-webapp/node_modules && ln -s ../../yunity-webapp-common .
 	@cd yunity-webapp && $$(npm bin)/webpack
 
 setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-webapp-mobile && npm-cache install bower npm
+	@cd yunity-webapp && npm-cache install npm
+	@cd yunity-webapp && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp-mobile/node_modules/yunity-webapp-common
 	@cd yunity-webapp-mobile/node_modules && ln -s ../../yunity-webapp-common .
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
