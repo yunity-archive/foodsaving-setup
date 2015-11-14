@@ -85,7 +85,7 @@ init-db:
 	@echo && echo "# $@" && echo
 	@$(PSQL) -U $(pg_user) postgres -tAc \
 		"SELECT 1 FROM pg_roles WHERE rolname='yunity-user'" | grep -q 1 || \
-		$(CREATEUSER) -U $(pg_user) -s yunity-user || \
+		$(PSQL) -tAc "create user \"yunity-user\" with password 'yunity'"  || \
 		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
 	@$(PSQL) -U $(pg_user) postgres -tAc \
 		"SELECT 1 FROM pg_database WHERE datname = 'yunity-database'" | grep -q 1 || \
