@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/yunity/yunity#readme",
   "dependencies": {
-    "http-proxy": "^1.11.2"
+    "connect": "^3.4.0",
+    "http-proxy": "^1.11.2",
+    "serve-static": "^1.10.0"
   },
   "devDependencies": {
     "autobahn": "^0.9.6"

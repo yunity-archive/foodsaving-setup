@@ -24,7 +24,7 @@ project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yun
 
 .PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
 
-setup: setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile
+setup: setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile setup-swagger-ui
 
 update: | git-pull setup
 
@@ -53,6 +53,17 @@ setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-sy
 	@rm -rf yunity-webapp-mobile/node_modules/yunity-webapp-common
 	@cd yunity-webapp-mobile/node_modules && ln -s ../../yunity-webapp-common .
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
+
+setup-swagger-ui: swagger-ui
+	@sed -i 's,http://petstore.swagger.io/v2/swagger.json,http://localhost:8000/doc,g' swagger-ui/swagger/dist/index.html
+
+swagger.tar.gz:
+	@wget https://github.com/swagger-api/swagger-ui/archive/v2.1.3.tar.gz -O swagger.tar.gz
+
+swagger-ui: swagger.tar.gz
+	@tar zxvf swagger.tar.gz
+	@mkdir -p swagger-ui
+	@mv swagger-ui-2.1.3 swagger-ui/swagger
 
 # check deps
 
