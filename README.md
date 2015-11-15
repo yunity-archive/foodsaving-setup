@@ -64,7 +64,7 @@ To start all the services run:
 pm2 start pm2.json
 ```
 
-Then visit http://localhost:8090 to see the webapp and http://localhost:8091 for the mobile webapp.
+Then visit [localhost:8090](http://localhost:8090) to see the webapp and [localhost:8091](http://localhost:8091) for the mobile webapp.
 
 ## Endpoints
 
