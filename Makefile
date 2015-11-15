@@ -80,7 +80,7 @@ git-pull:
 	@git pull
 	@for dir in $(project_dirs); do \
 		echo "git pulling $$dir"; \
-		cd $$dir && git pull; cd -; \
+		cd $$dir && git pull --rebase; cd -; \
   done;
 
 # create database and user if they don't exist
