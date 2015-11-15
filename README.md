@@ -73,13 +73,13 @@ The proxy serves up the following endpoints you can visit:
 URL                                                         | Purpose
 ------------------------------------------------------------|----------------------------------------------
 [localhost:8090/](http://localhost:8090/)                   | webapp served here
-[localhost:8090/api](http://localhost:8090/api)             | django api endpoint
-[localhost:8090/socket](http://localhost:8090/socket)       | yunity-sockets socket.io endpoint
-[localhost:8090/socket.io](http://localhost:8090/socket.io) | webapp webpack-dev-server socket.io endpoint
+[localhost:8090/api](http://localhost:8090/api/)             | django api endpoint
+[localhost:8090/socket](http://localhost:8090/socket/)       | yunity-sockets socket.io endpoint
+[localhost:8090/socket.io](http://localhost:8090/socket.io/) | webapp webpack-dev-server socket.io endpoint
 [localhost:8091/](http://localhost:8091/)                   | mobile webapp served here
-[localhost:8091/api](http://localhost:8091/api)             | django api endpoint
-[localhost:8091/socket](http://localhost:8091/socket)       | yunity-sockets socket.io endpoint
-[localhost:8091/socket.io](http://localhost:8091/socket.io) | mobile webapp webpack-dev-server socket.io endpoint
+[localhost:8091/api](http://localhost:8091/api/)             | django api endpoint
+[localhost:8091/socket](http://localhost:8091/socket/)       | yunity-sockets socket.io endpoint
+[localhost:8091/socket.io](http://localhost:8091/socket.io/) | mobile webapp webpack-dev-server socket.io endpoint
 
 This should be everything you need to hit, but for debugging you might want to hit endpoints directly (and also [localhost:9080](http://localhost:9080) to see which clients are connected to yunity-sockets)
 
