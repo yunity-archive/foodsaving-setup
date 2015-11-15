@@ -22,9 +22,11 @@ git_url_base = git@github.com:yunity/
 
 project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yunity-webapp-mobile
 
-.PHONY: setup setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
+.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
 
 setup: setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile
+
+update: | git-pull setup
 
 setup-core: | yunity-core init-db pip-install django-migrate
 
