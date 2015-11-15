@@ -113,22 +113,6 @@ pm2 list
 pm2 stop django
 ```
 
-## Updating
-
-If you just want to generally update everything, you can run:
-
-```sh
-make
-```
-
-It runs idempotently and should always be safe to run.
-
-This won't run any `git pull` commands, if you want this too, run:
-
-```sh
-make git-pull setup
-```
-
 ## Add git hook to update common files automatically
 
 ```sh
@@ -140,9 +124,10 @@ chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
 
 The setup script is intended to work in many unix-y environments but you might have some setup differences, you can set some options in `local_settings.make`:
 
-Name     | Meaning                                                                | Example
----------|------------------------------------------------------------------------|-----------------------------
-pg_user  | Which postgres role to use (in commands like `psql -U <pg_user>`)     | pg_user=mycustomuser
+Name     | Meaning                                                                               | Example
+---------|---------------------------------------------------------------------------------------|-----------------------------
+pg_user  | Which postgres role to use (in commands like `psql -U <pg_user>`)                     | pg_user = mycustomuser
+pg       | How to run pg commands (psql|createdb|createuser) `$(1)` is replaced with the command | pg = sudo -u $(pg_user) $(1) -U $(pg_user)
 
 ## Custom virtualenv location
 
