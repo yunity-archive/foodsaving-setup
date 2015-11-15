@@ -8,6 +8,8 @@ It helps you to:
 - setup the application dependencies
 - setup the database and run the migrations
 - run/manage the application's processes using pm2
+ 
+If you don't want to install a load of system services on your machine, you might want to use the [vagrant setup](https://github.com/yunity/yunity-vagrant).
 
 ## Install system deps
 
