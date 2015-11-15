@@ -11,7 +11,7 @@ var MOBILE_SERVER = 'http://localhost:8084';
 
 var SWAGGER_SERVER = 'http://localhost:' + SWAGGER_PORT;
 
-var SWAGGER_PATH = '/swagger/dist/index.html';
+var SWAGGER_PATH = '/swagger/dist/index-yunity.html';
 var SWAGGER_URL = 'http://localhost:' + SWAGGER_PORT + SWAGGER_PATH;
 var WEBSITE_URL = 'http://localhost:' + WEBSITE_PORT;
 var MOBILE_URL = 'http://localhost:' + MOBILE_PORT;
