@@ -52,7 +52,7 @@ http.createServer(function(req, res){
 var httpWeb = http.createServer(function(req, res) {
   console.log('proxy web req from', req.url);
 
-  if (/^\/api/.test(req.url)) {
+  if (/^\/api/.test(req.url) || /^\/doc/.test(req.url)) {
     // django backend api
     proxy.web(req, res, { target: DJANGO_BACKEND });
   } else if (SOCKETIO_PATH_RE.test(req.url)) {
@@ -88,7 +88,7 @@ httpWeb.listen(WEBSITE_PORT);
 
 var httpMobile = http.createServer(function(req, res) {
   console.log('proxy mobile req from', req.url);
-  if (/^\/api/.test(req.url)) {
+  if (/^\/api/.test(req.url) || /^\/doc/.test(req.url)) {
     // django backend api
     proxy.web(req, res, { target: DJANGO_BACKEND });
   } else if (SOCKETIO_PATH_RE.test(req.url)) {

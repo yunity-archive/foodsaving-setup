@@ -55,7 +55,7 @@ setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-sy
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
 
 setup-swagger-ui: swagger-ui
-	@sed -i 's,http://petstore.swagger.io/v2/swagger.json,http://localhost:8000/doc,g' swagger-ui/swagger/dist/index.html
+	@sed -i 's,"http://petstore.swagger.io/v2/swagger.json","http://" + window.location.host + "/doc",g' swagger-ui/swagger/dist/index.html
 
 swagger.tar.gz:
 	@wget https://github.com/swagger-api/swagger-ui/archive/v2.1.3.tar.gz -O swagger.tar.gz
