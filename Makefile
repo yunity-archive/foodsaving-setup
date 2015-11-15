@@ -30,7 +30,7 @@ setup-core: | yunity-core init-db pip-install django-migrate
 
 setup-sockets: | yunity-sockets npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-sockets && npm-cache install npm
+	@cd yunity-sockets && npm-cache install npm --unsafe-perm
 
 setup-webapp-common: | yunity-webapp-common npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
@@ -38,7 +38,7 @@ setup-webapp-common: | yunity-webapp-common npm-deps npm-system-deps
 
 setup-webapp: | yunity-webapp-common yunity-webapp npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-webapp && npm-cache install npm
+	@cd yunity-webapp && npm-cache install npm --unsafe-perm
 	@cd yunity-webapp && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp/node_modules/yunity-webapp-common
 	@cd yunity-webapp/node_modules && ln -s ../../yunity-webapp-common .
@@ -46,7 +46,7 @@ setup-webapp: | yunity-webapp-common yunity-webapp npm-deps npm-system-deps
 
 setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-webapp-mobile && npm-cache install npm
+	@cd yunity-webapp-mobile && npm-cache install npm --unsafe-perm
 	@cd yunity-webapp-mobile && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp-mobile/node_modules/yunity-webapp-common
 	@cd yunity-webapp-mobile/node_modules && ln -s ../../yunity-webapp-common .
@@ -128,4 +128,4 @@ npm-system-deps:
 
 npm-deps:
 	@echo && echo "# $@" && echo
-	@npm-cache install npm
+	@npm-cache install npm --unsafe-perm
