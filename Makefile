@@ -5,6 +5,7 @@ pg_user = postgres
 
 db_user = yunity-user
 db_name = yunity-database
+db_test_name = test_yunity-database
 db_password = yunity
 
 # $(1) will be replaced with a postgres tool (psql|createuser|createdb)
@@ -137,6 +138,7 @@ init-db:
 drop-db:
 	@echo && echo "# $@" && echo
 	@$(DROPDB) $(db_name) --if-exists
+	@$(DROPDB) $(db_test_name) --if-exists
 	@$(DROPUSER) $(db_user) --if-exists
 
 # recreate-db
