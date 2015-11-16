@@ -123,7 +123,7 @@ init-db:
 	@echo && echo "# $@" && echo
 	@$(PSQL) postgres -tAc \
 		"SELECT 1 FROM pg_roles WHERE rolname='$(db_user)'" | grep -q 1 || \
-		$(PSQL) -tAc "create user \"$(db_user)\" with password '$(db_password)'"  || \
+		$(PSQL) -tAc "create user \"$(db_user)\" with CREATEDB password '$(db_password)'"  || \
 		echo "--> failed to create db user $(db_user), please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
 	@$(PSQL) postgres -tAc \
 		"SELECT 1 FROM pg_database WHERE datname = '$(db_name)'" | grep -q 1 || \
