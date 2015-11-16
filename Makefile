@@ -81,6 +81,7 @@ setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-sy
 #   2. adds django csrf headers to xhr requests
 setup-swagger-ui: swagger-ui
 	@cp index-yunity.html swagger-ui/swagger/dist/
+	@cd swagger-ui/swagger/dist && patch -p0 < ../../../swagger-ui.patch
 
 swagger.tar.gz:
 	@wget https://github.com/swagger-api/swagger-ui/archive/v2.1.3.tar.gz -O swagger.tar.gz

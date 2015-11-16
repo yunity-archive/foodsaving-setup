@@ -1,0 +1,16 @@
+--- swagger-ui.js	2015-09-19 20:58:10.000000000 +0200
++++ swagger-ui.js	2015-11-16 13:45:26.958266568 +0100
+@@ -31855,9 +31855,10 @@
+ 
+     // HTML
+     } else if (contentType === 'text/html') {
+-      code = $('<code />').html(_.escape(content));
+-      pre = $('<pre class="xml" />').append(code);
+-
++      var iframe = document.createElement('iframe');
++      iframe.srcdoc = content;
++      iframe.style = 'width: 100%; height: 500px;';
++      pre = iframe;
+     // Plain Text
+     } else if (/text\/plain/.test(contentType)) {
+       code = $('<code />').text(content);
