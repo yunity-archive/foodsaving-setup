@@ -99,14 +99,14 @@ git-pull:
 
 init-db:
 	@echo && echo "# $@" && echo
-	@$(PSQL) -U $(pg_user) postgres -tAc \
+	@$(PSQL) postgres -tAc \
 		"SELECT 1 FROM pg_roles WHERE rolname='yunity-user'" | grep -q 1 || \
 		$(PSQL) -tAc "create user \"yunity-user\" with password 'yunity'"  || \
-		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
-	@$(PSQL) -U $(pg_user) postgres -tAc \
+		echo "--> failed to create db user yunity-user, please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
+	@$(PSQL) postgres -tAc \
 		"SELECT 1 FROM pg_database WHERE datname = 'yunity-database'" | grep -q 1 || \
-		$(CREATEDB) -U $(pg_user) yunity-database || \
-		echo "--> failed to create db user yunity-user, please set a pg_user in local_settings.make or ensure the default 'postgres' db role is available"
+		$(CREATEDB) yunity-database || \
+		echo "--> failed to create db user yunity-user, please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
 
 # copy default dev local_settings.py with db details for django
 
