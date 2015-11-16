@@ -28,7 +28,7 @@ var proxy = httpProxy.createProxyServer({});
 var sites = [
   { name: 'web app',            url: WEBAPP_URL },
   { name: 'mobile web app',     url: MOBILE_URL },
-  { name: 'swagger docs',       url: WEBAPP_URL + '/swagger' },
+  { name: 'swagger',            url: WEBAPP_URL + '/swagger' },
   { name: 'socket connections', url: 'http://localhost:9080/' }
 ];
 
@@ -75,9 +75,9 @@ http.createServer(function(req, res){
     'Content-Type': 'text/html'
   });
   res.end([
-    '<style type="text/css">li { display: inline; padding: 5px 10px; } iframe { position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: calc(100% - 50px); }</style>',
+    '<style type="text/css">body,li,ul{margin:0}ul{border:1px solid red}li{float:left;list-style:none}iframe{position:absolute;bottom:0;left:0;right:0;width:100%;height:calc(100% - 40px);background-color:#fff;border:none;border-top:3px solid #000}body{background-color:#333;font-family:arial;font-size:14px}li>a,li>span{color:#eee;text-decoration:none;display:block;padding:10px}li>span{color:#aaa}</style>',
     '<ul>',
-    '<li>yunity sites</li>',
+    '<li><span>yunity dev</span></li>',
     sites.map(function(site){
       return '<li><a href="' + site.url + '" target="aniceiframe">' + site.name + '</a></li>';
     }).join(''),
