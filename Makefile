@@ -3,6 +3,10 @@
 
 pg_user = postgres
 
+db_user = yunity-user
+db_name = yunity-database
+db_password = yunity
+
 # $(1) will be replaced with a postgres tool (psql|createuser|createdb)
 # you can override this in local_settings.make so make it use "sudo -u ", etc....
 
@@ -11,6 +15,8 @@ pg = $(1) -U $(pg_user)
 PSQL = $(call pg,psql)
 CREATEDB = $(call pg,createdb)
 CREATEUSER = $(call pg,createuser)
+DROPDB= $(call pg,dropdb)
+DROPUSER= $(call pg,dropuser)
 
 git_url_base = git@github.com:yunity/
 
@@ -100,13 +106,21 @@ git-pull:
 init-db:
 	@echo && echo "# $@" && echo
 	@$(PSQL) postgres -tAc \
-		"SELECT 1 FROM pg_roles WHERE rolname='yunity-user'" | grep -q 1 || \
-		$(PSQL) -tAc "create user \"yunity-user\" with password 'yunity'"  || \
-		echo "--> failed to create db user yunity-user, please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
+		"SELECT 1 FROM pg_roles WHERE rolname='$(db_user)'" | grep -q 1 || \
+		$(PSQL) -tAc "create user \"$(db_user)\" with password '$(db_password)'"  || \
+		echo "--> failed to create db user $(db_user), please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
 	@$(PSQL) postgres -tAc \
-		"SELECT 1 FROM pg_database WHERE datname = 'yunity-database'" | grep -q 1 || \
-		$(CREATEDB) yunity-database || \
-		echo "--> failed to create db user yunity-user, please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
+		"SELECT 1 FROM pg_database WHERE datname = '$(db_name)'" | grep -q 1 || \
+		$(CREATEDB) $(db_name) || \
+		echo "--> failed to create db user $(db_user), please set pg_user or pg in local_settings.make or ensure the default 'postgres' db role is available"
+
+drop-db:
+	@echo && echo "# $@" && echo
+	@$(DROPDB) $(db_name) --if-exists
+	@$(DROPUSER) $(db_user) --if-exists
+
+recreate-db: | drop-db init-db
+	@echo && echo "# $@" && echo
 
 # copy default dev local_settings.py with db details for django
 
