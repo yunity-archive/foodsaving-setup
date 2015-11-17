@@ -29,7 +29,7 @@ git_url_base = git@github.com:yunity/
 
 project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yunity-webapp-mobile
 
-.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install django-migrate init-db check-deps
+.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install migrate-db init-db check-deps
 
 # setup
 #
@@ -49,7 +49,7 @@ update:
 	@git pull
 	@make git-pull setup
 
-setup-core: | yunity-core init-db pip-install django-migrate
+setup-core: | yunity-core init-db pip-install migrate-db
 
 setup-sockets: | yunity-sockets npm-system-deps
 	@echo && echo "# $@" && echo
@@ -147,6 +147,13 @@ drop-db:
 recreate-db: | drop-db init-db
 	@echo && echo "# $@" && echo
 
+# migate-db
+#
+# run django migrations
+migrate-db: yunity-core/env yunity-core/config/local_settings.py init-db
+	@echo && echo "# $@" && echo
+	@cd yunity-core && env/bin/python manage.py migrate
+
 # copy default dev local_settings.py with db details for django
 yunity-core/config/local_settings.py:
 	@echo && echo "# $@" && echo
@@ -156,11 +163,6 @@ yunity-core/config/local_settings.py:
 pip-install: yunity-core/env
 	@echo && echo "# $@" && echo
 	@cd yunity-core && env/bin/pip install -r requirements.pip
-
-# migrate django
-django-migrate: yunity-core/env yunity-core/config/local_settings.py init-db
-	@echo && echo "# $@" && echo
-	@cd yunity-core && env/bin/python manage.py migrate
 
 # virtualenv initialization
 yunity-core/env:
