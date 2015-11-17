@@ -27,9 +27,11 @@ git_url_base = git@github.com:yunity/
 
 # all yunity-* projects
 
-project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yunity-webapp-mobile
+frontend_project_dirs = yunity-webapp-common yunity-webapp yunity-webapp-mobile
+backend_project_dirs = yunity-core yunity-sockets
+project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 
-.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull pip-install migrate-db init-db check-deps
+.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps
 
 # setup
 #
@@ -37,7 +39,10 @@ project_dirs = yunity-core yunity-sockets yunity-webapp-common yunity-webapp yun
 #  (will check it out if not)
 # ensures database and users are created
 # runs all the npm/bower/pip/django/migation steps
-setup: setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile setup-swagger-ui
+setup: setup-backend setup-frontend
+
+setup-backend: setup-core setup-sockets setup-swagger-ui
+setup-frontend: setup-webapp-common setup-webapp setup-webapp-mobile
 
 # update
 #
@@ -47,7 +52,15 @@ setup: setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mo
 update:
 	@echo && echo "# $@" && echo
 	@git pull
-	@make git-pull setup
+	@make git-pull-backend git-pull-backend setup
+
+# update-backend
+#
+# just update backend stuff so don't have to wait for npm...
+update-backend:
+	@echo && echo "# $@" && echo
+	@git pull
+	@make git-pull-backend setup-backend
 
 setup-core: | yunity-core init-db pip-install migrate-db
 
@@ -107,13 +120,16 @@ $(project_dirs):
 	@echo && echo "# $@" && echo
 	@git clone $(git_url_base)$@.git
 
-# git-pull
-#
-# pull each of the projects
-# but not this repo itself
-git-pull:
+git-pull-frontend:
 	@echo && echo "# $@" && echo
-	@for dir in $(project_dirs); do \
+	@for dir in $(frontend_project_dirs); do \
+		echo "git pulling $$dir"; \
+		cd $$dir && git pull --rebase; cd -; \
+  done;
+
+git-pull-backend:
+	@echo && echo "# $@" && echo
+	@for dir in $(backend_project_dirs); do \
 		echo "git pulling $$dir"; \
 		cd $$dir && git pull --rebase; cd -; \
   done;
