@@ -178,7 +178,7 @@ yunity-core/config/local_settings.py:
 # pip install env
 pip-install: yunity-core/env
 	@echo && echo "# $@" && echo
-	@cd yunity-core && env/bin/pip install -r requirements.pip
+	@cd yunity-core && env/bin/pip install -r requirements.txt
 
 # virtualenv initialization
 yunity-core/env:
