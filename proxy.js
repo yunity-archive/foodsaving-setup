@@ -2,6 +2,8 @@ var http = require('http');
 var httpProxy = require('http-proxy');
 var connect = require('connect');
 var serveStatic = require('serve-static');
+var fs = require('fs');
+var tpl = require('./TemplateEngine.js');
 
 var SOCKETIO_PATH_RE = /^\/socket\//;
 
@@ -18,8 +20,9 @@ var SWAGGER_SERVER = 'http://localhost:' + SWAGGER_PORT;
 
 var SWAGGER_PATH = '/swagger/dist/index-yunity.html';
 
-var WEBAPP_URL = 'http://localhost:' + WEBAPP_PORT;
-var MOBILE_URL = 'http://localhost:' + MOBILE_PORT;
+var WEBAPP_URL = ':' + WEBAPP_PORT + '/';
+var MOBILE_URL = ':' + MOBILE_PORT + '/';
+var SOCKET_CONNECTION_VIEW_URL = ':9080/';
 
 var proxy = httpProxy.createProxyServer({});
 
@@ -28,8 +31,8 @@ var proxy = httpProxy.createProxyServer({});
 var sites = [
   { name: 'web app',            url: WEBAPP_URL },
   { name: 'mobile web app',     url: MOBILE_URL },
-  { name: 'swagger',            url: WEBAPP_URL + '/swagger' },
-  { name: 'socket connections', url: 'http://localhost:9080/' }
+  { name: 'swagger',            url: WEBAPP_URL + 'swagger' },
+  { name: 'socket connections', url: SOCKET_CONNECTION_VIEW_URL }
 ];
 
 /*
@@ -71,19 +74,22 @@ swagger.listen(SWAGGER_PORT);
 */
 
 http.createServer(function(req, res){
-  res.writeHead(200, {
-    'Content-Type': 'text/html'
+  fs.readFile('res/dev-view.tpl', 'utf8', function(err, data){
+    if(err) {
+      console.log('error reading dev view template');
+      res.writeHead(500);
+      res.end('Could not read template');
+    } else {
+      var host = req.headers['host'];
+      host = 'http://' + host.split(':')[0];
+      res.writeHead(200, {
+        'Content-Type': 'text/html'
+      });
+      processed = tpl(data, {sites : sites, host: host});
+      res.write(processed, 'utf8');
+      res.end();
+    }
   });
-  res.end([
-    '<style type="text/css">body,li,ul{margin:0}ul{border:1px solid red}li{float:left;list-style:none}iframe{position:absolute;bottom:0;left:0;right:0;width:100%;height:calc(100% - 40px);background-color:#fff;border:none;border-top:3px solid #000}body{background-color:#333;font-family:arial;font-size:14px}li>a,li>span{color:#eee;text-decoration:none;display:block;padding:10px}li>span{color:#aaa}</style>',
-    '<ul>',
-    '<li><span>yunity dev</span></li>',
-    sites.map(function(site){
-      return '<li><a href="' + site.url + '" target="aniceiframe">' + site.name + '</a></li>';
-    }).join(''),
-    '</ul>',
-    '<iframe name="aniceiframe"></iframe>'
-  ].join(''));
 }).listen(DEV_PORT);
 
 /*
