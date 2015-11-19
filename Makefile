@@ -8,6 +8,8 @@ db_name = yunity-database
 db_test_name = test_yunity-database
 db_password = yunity
 
+swagger_version = 2.1.3
+
 # $(1) will be replaced with a postgres tool (psql|createuser|createdb)
 # you can override this in local_settings.make so make it use "sudo -u ", etc....
 
@@ -90,19 +92,23 @@ setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-sy
 
 # setup-swagger-ui
 #
+# delete existing one, and put a new one in
 # we use a custom swagger html page which
 #   1. prepopulates the url inside the page with the correct one
 #   2. adds django csrf headers to xhr requests
-setup-swagger-ui: swagger-ui
+setup-swagger-ui: | clean-swagger-ui swagger-ui
 	@cp index-yunity.html swagger-ui/swagger/dist/
 
-swagger.tar.gz:
-	@wget https://github.com/swagger-api/swagger-ui/archive/v2.1.3.tar.gz -O swagger.tar.gz
+clean-swagger-ui:
+	@rm -rf swagger-ui
 
-swagger-ui: swagger.tar.gz
-	@tar zxvf swagger.tar.gz
+swagger-$(swagger_version).tar.gz:
+	@wget https://github.com/swagger-api/swagger-ui/archive/v$(swagger_version).tar.gz -O swagger-$(swagger_version).tar.gz
+
+swagger-ui: swagger-$(swagger_version).tar.gz
+	@tar zxvf swagger-$(swagger_version).tar.gz
 	@mkdir -p swagger-ui
-	@mv swagger-ui-2.1.3 swagger-ui/swagger
+	@mv swagger-ui-$(swagger_version) swagger-ui/swagger
 	@cd swagger-ui/swagger/dist && patch -p0 < ../../../swagger-ui.patch
 
 # check-deps
