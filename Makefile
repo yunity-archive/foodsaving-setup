@@ -54,7 +54,7 @@ setup-frontend: setup-webapp-common setup-webapp setup-webapp-mobile
 update:
 	@echo && echo "# $@" && echo
 	@git pull
-	@make git-pull-backend git-pull-backend setup
+	@make git-pull-backend git-pull-frontend setup
 
 # update-backend
 #
