@@ -29,7 +29,7 @@ git_url_base = git@github.com:yunity/
 
 # all yunity-* projects
 
-frontend_project_dirs = yunity-webapp-common yunity-webapp yunity-webapp-mobile
+frontend_project_dirs = yunity-webapp-common yunity-webapp-mobile
 backend_project_dirs = yunity-core yunity-sockets
 project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 
@@ -44,7 +44,7 @@ project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 setup: setup-backend setup-frontend
 
 setup-backend: setup-core setup-sockets setup-swagger-ui
-setup-frontend: setup-webapp-common setup-webapp setup-webapp-mobile
+setup-frontend: setup-webapp-common setup-webapp-mobile
 
 # update
 #
@@ -64,6 +64,11 @@ update-backend:
 	@git pull
 	@make git-pull-backend setup-backend
 
+update-frontend:
+	@echo && echo "# $@" && echo
+	@git pull
+	@make git-pull-frontend setup-frontend
+
 setup-core: | yunity-core init-db pip-install migrate-db
 
 setup-sockets: | yunity-sockets npm-system-deps
@@ -80,14 +85,19 @@ setup-webapp: | yunity-webapp-common yunity-webapp npm-deps npm-system-deps
 	@cd yunity-webapp && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp/node_modules/yunity-webapp-common
 	@cd yunity-webapp/node_modules && ln -s ../../yunity-webapp-common .
+	#@cd yunity-webapp && $$(npm bin)/webpack
+
+build-webapp:
 	@cd yunity-webapp && $$(npm bin)/webpack
 
 setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
 	@cd yunity-webapp-mobile && npm-cache install npm --unsafe-perm
-	@cd yunity-webapp-mobile && npm-cache install bower --allow-root
+	#@cd yunity-webapp-mobile && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp-mobile/node_modules/yunity-webapp-common
 	@cd yunity-webapp-mobile/node_modules && ln -s ../../yunity-webapp-common .
+
+build-webapp-mobile:
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
 
 # setup-swagger-ui
