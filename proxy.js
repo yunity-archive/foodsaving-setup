@@ -29,9 +29,10 @@ var proxy = httpProxy.createProxyServer({});
 /* these sites will be shown on the top bar of the admin/dev site */
 
 var sites = [
-  { name: 'web app',            url: WEBAPP_URL },
+  // not working on the app app for now
+  //{ name: 'web app',            url: WEBAPP_URL },
   { name: 'mobile web app',     url: MOBILE_URL },
-  { name: 'swagger',            url: WEBAPP_URL + 'swagger' },
+  { name: 'swagger',            url: MOBILE_URL + 'swagger' },
   { name: 'socket connections', url: SOCKET_CONNECTION_VIEW_URL }
 ];
 
@@ -42,7 +43,8 @@ var sites = [
 
 */
 
-createHttpServerFor(WEBAPP_SERVER).listen(WEBAPP_PORT);
+// removed because we are not working on it right now
+//createHttpServerFor(WEBAPP_SERVER).listen(WEBAPP_PORT);
 
 /*
 
