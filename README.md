@@ -13,10 +13,10 @@ If you don't want to install a load of system services on your machine, you migh
 
 ## Install system deps
 
-You must first install:
+In this section we will install the following dependencies:
 - python3.5 or greater/virtualenv
 - node/npm (should work with 0.12.x and 4.x)
-- postgresql >9.4
+- postgresql >=9.4
 - redis-server
 - elasticsearch
 
@@ -39,12 +39,6 @@ Node.js has to be installed independently. See  [these instructions](https://nod
 
 ```sh
 sudo ln -s /usr/share/elasticsearch/bin/elasticsearch /usr/local/bin/elasticsearch
-```
-
-#### postgresql 9.4 in Ubuntu >= 14.10
-
-```sh
-sudo apt-get install postgresql postgresql-server-dev-9.4
 ```
 
 #### postgresql 9.4 in Ubuntu 14.04 and lower
