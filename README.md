@@ -33,6 +33,8 @@ As yunity requires relatively recent versions of some packages, using Ubuntu 15.
 sudo apt-get install git redis-server elasticsearch python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
 ```
 
+Node.js has to be installed independently. See  [these instructions](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
+
 ### Make elasticsearch bin accessable in Ubuntu / Debian
 
 ```sh
