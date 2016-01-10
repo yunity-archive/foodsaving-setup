@@ -14,7 +14,7 @@ If you don't want to install a load of system services on your machine, you migh
 ## Install system deps
 
 You must first install:
-- python3/virtualenv
+- python3.5 or greater/virtualenv
 - node/npm (should work with 0.12.x and 4.x)
 - postgresql >9.4
 - redis-server
@@ -27,6 +27,7 @@ make check-deps
 ```
 
 ### Ubuntu / Debian
+As yunity requires relatively recent versions of some packages, using Ubuntu 15.10 or greater is recommended.
 
 ```sh
 sudo apt-get install git redis-server elasticsearch python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
@@ -46,8 +47,15 @@ sudo apt-get install postgresql postgresql-server-dev-9.4
 
 #### postgresql 9.4 in Ubuntu 14.04 and lower
 
+Add the following to your /etc/apt/sources.list (or a custom configuration)
+
 ```sh
 deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
+```
+
+then import the package signing key, update your package lists and install postgres:
+
+```sh
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update && sudo apt-get install postgresql-9.4 postgresql-server-dev-9.4
 ```
