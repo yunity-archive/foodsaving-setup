@@ -29,7 +29,7 @@ make check-deps
 ### Ubuntu / Debian
 
 ```sh
-sudo apt-get install install git redis-server elasticsearch python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
+sudo apt-get install git redis-server elasticsearch python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
 ```
 
 ### Make elasticsearch bin accessable in Ubuntu / Debian
