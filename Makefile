@@ -21,7 +21,7 @@ CREATEUSER = $(call pg,createuser)
 DROPDB= $(call pg,dropdb)
 DROPUSER= $(call pg,dropuser)
 
-git_url_base = git@github.com:yunity/
+git_url_base = https://github.com/yunity/
 
 # override settings, optionally
 
