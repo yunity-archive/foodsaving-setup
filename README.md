@@ -141,7 +141,7 @@ The setup script is intended to work in many unix-y environments but you might h
 Name     | Meaning                                                                               | Example
 ---------|---------------------------------------------------------------------------------------|-----------------------------
 pg_user  | Which postgres role to use (in commands like `psql -U <pg_user>`)                     | `pg_user = mycustomuser`
-pg       | How to run pg commands (psql,createdb,createuser) `$(1)` is replaced with the command | `pg = sudo -u $(pg_user) $(1) -U $(pg_user)`
+pg       | How to run pg commands (psql,createdb,createuser) `$(1)` is replaced with the command | `pg = sudo -u $(pg_user) $(1)`
 
 ## Custom virtualenv location
 
