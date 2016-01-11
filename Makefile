@@ -93,7 +93,7 @@ build-webapp:
 setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
 	@cd yunity-webapp-mobile && npm-cache install npm --unsafe-perm
-	#@cd yunity-webapp-mobile && npm-cache install bower --allow-root
+	@cd yunity-webapp-mobile && npm-cache install bower --allow-root
 	@rm -rf yunity-webapp-mobile/node_modules/yunity-webapp-common
 	@cd yunity-webapp-mobile/node_modules && ln -s ../../yunity-webapp-common .
 
