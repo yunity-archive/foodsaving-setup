@@ -173,10 +173,14 @@ drop-db:
 	@$(DROPDB) $(db_test_name) --if-exists
 	@$(DROPUSER) $(db_user) --if-exists
 
+disconnect-db-sessions:
+	@$(PSQL) postgres -tAc \
+		"SELECT pg_terminate_backend(pid) FROM pg_stat_activity where datname = '${db_name}';"
+
 # recreate-db
 #
 # drop, then create
-recreate-db: | drop-db init-db
+recreate-db: | disconnect-db-sessions drop-db init-db
 	@echo && echo "# $@" && echo
 
 # migate-db
