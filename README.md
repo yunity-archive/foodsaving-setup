@@ -143,6 +143,18 @@ Name     | Meaning                                                              
 pg_user  | Which postgres role to use (in commands like `psql -U <pg_user>`)                     | `pg_user = mycustomuser`
 pg       | How to run pg commands (psql,createdb,createuser) `$(1)` is replaced with the command | `pg = sudo -u $(pg_user) $(1)`
 
+## postgres without sudo
+
+Some OSes postgres package will require you to use `sudo` to become the `postgres` user. You can change this by modifying your `pg_hba.conf` file to include
+an entry something like this:
+
+```
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+local   all             all                                     trust
+```
+
+(this says: allow any local user on the machine to connect to any database)
+
 ## Custom virtualenv location
 
 If you're using virtualenvwrapper or just want your virtualenv to be in a special location, first create a symlink and it will use that one, e.g.:
