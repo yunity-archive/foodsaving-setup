@@ -10,6 +10,7 @@ It helps you to:
 - run/manage the application's processes using pm2
 
 The app is split into frontend and backend parts. You can either:
+
 1. run everything locally on your machine
 2. run the backend in a vagrant vm and run the frontend locally (Note: the app is in heavy development right now, so this might not work)
 
