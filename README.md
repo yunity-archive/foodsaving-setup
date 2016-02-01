@@ -8,8 +8,10 @@ It helps you to:
 - setup the application dependencies
 - setup the database and run the migrations
 - run/manage the application's processes using pm2
- 
-If you don't want to install a load of system services on your machine, you might want to use the [vagrant setup](https://github.com/yunity/yunity-vagrant).
+
+The app is split into frontend and backend parts. You can either:
+1. run everything locally on your machine
+2. run the backend in a vagrant vm and run the frontend locally (Note: the app is in heavy development right now, so this might not work)
 
 ## Install system deps
 
@@ -56,26 +58,48 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-get update && sudo apt-get install postgresql-9.4 postgresql-server-dev-9.4
 ```
 
-## Quick start
+## Quick start (everything local)
 
 ```sh
 git clone https://github.com/yunity/yunity-setup.git yunity
 cd yunity
 make
-```
-
-To start all the services run:
-
-```sh
 pm2 start pm2.json
 ```
 
-Then visit [localhost:8090](http://localhost:8090) to see the webapp and [localhost:8091](http://localhost:8091) for the mobile webapp.
+Then visit [localhost:5000](http://localhost:5000) to access all the things.
 
 To update everything later on, run:
 
 ```
 make update
+```
+
+## Quick start (with vagrant backend)
+
+Note: the app is in heavy development right now, so this might not work.
+
+```sh
+git clone https://github.com/yunity/yunity-setup.git yunity
+cd yunity
+vagrant box add yunity-backend http://p12607.ngcobalt20.manitu.net/download.php?file=yunity-backend-1.0.box
+vagrant up
+make setup-frontend
+pm2 start pm2-frontend.json
+```
+
+Then visit [localhost:5000](http://localhost:5000) to access all the things.
+
+To update the frontend later on, run:
+
+```
+make update-frontend
+```
+
+... and the backend (inside the vagrant box), run:
+
+```
+vagrant ssh -- ./update
 ```
 
 ## Endpoints
