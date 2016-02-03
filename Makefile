@@ -175,7 +175,7 @@ drop-db:
 
 disconnect-db-sessions:
 	@$(PSQL) postgres -tAc \
-		"SELECT pg_terminate_backend(pid) FROM pg_stat_activity where datname = '${db_name}';"
+		"SELECT pg_terminate_backend(pid) FROM pg_stat_activity where datname IN ('${db_name}', '${db_test_name}');"
 
 # recreate-db
 #
