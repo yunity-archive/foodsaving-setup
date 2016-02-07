@@ -229,20 +229,3 @@ cd yunity-core
 rm -rf env # if present
 ln -s ~/.envs/yunity-core env
 ```
-
-## Errors
-
-You might have this error with django/python/crossbar:
-
-```sh
-crossbar-3 (err): pkg_resources.DistributionNotFound: The 'cryptography>=0.7' distribution was not found and is required by pyOpenSSL
-```
-
-if you get this kind of error message go into the yunity-core repository and force reinstall the requirements
-
-
-```sh
-cd yunity-core
-./env/bin/pip install --force-reinstall --ignore-installed -r requirements.pip
-pm2 restart all
-```
