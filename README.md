@@ -59,6 +59,46 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-get update && sudo apt-get install postgresql-9.4 postgresql-server-dev-9.4
 ```
 
+### Archlinux
+
+All packages can be obtained from core, extra or community repositories. When queried, chose to install all packets out of base-devel.
+
+```sh
+sudo pacman -S base-devel python python-pip python-virtualenv postgresql python-redis redis npm
+```
+
+#### First-time postgres setup
+
+```sh
+sudo -i -u postgres
+initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
+```
+
+#### Start necessary processes
+
+By default, archlinux does not start the installed services.
+
+```sh
+sudo systemctl start postgres.service
+sudo systemctl start redis.service
+```
+
+You can add them to autostart as well:
+
+```sh
+sudo systemctl enable postgres.service
+sudo systemctl enable redis.service
+```
+
+### Relaxed postgres fsync behaviour
+On a local setup, you may want to change fsync behaviour to speed up the test running process. You may want to make sure to understand the implications but on a dev machine this should be fine.
+
+Edit /var/lib/postgres/data/postgresql.conf and add or edit
+
+```
+fsync = off
+```
+
 ## Quick start (everything local)
 
 ```sh
