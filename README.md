@@ -38,7 +38,7 @@ sudo apt-get install git redis-server elasticsearch python3 python3-dev python-v
 
 Node.js has to be installed independently. See  [these instructions](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
 
-### Make elasticsearch bin accessable in Ubuntu / Debian
+#### Make elasticsearch bin accessable in Ubuntu / Debian
 
 ```sh
 sudo ln -s /usr/share/elasticsearch/bin/elasticsearch /usr/local/bin/elasticsearch
