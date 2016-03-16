@@ -3,7 +3,9 @@
 # see http://stackoverflow.com/a/246128/2922612
 base="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-. $base/yunity-core/env/bin/activate
+if [ -f $base/yunity-core/env/bin/activate ]; then
+  . $base/yunity-core/env/bin/activate
+fi
 
 function pym() {
   (cd $base/yunity-core && env/bin/python manage.py "$@")
