@@ -27,13 +27,17 @@ git_url_base = https://github.com/yunity/
 
 -include local_settings.make
 
+# commands we can run a check for
+
+deps := wget git postgres redis-server virtualenv node npm
+
 # all yunity-* projects
 
 frontend_project_dirs = yunity-webapp-common yunity-webapp-mobile
 backend_project_dirs = yunity-core yunity-sockets
 project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 
-.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps
+.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps $(deps)
 
 # setup
 #
@@ -45,6 +49,12 @@ setup: setup-backend setup-frontend
 
 setup-backend: setup-core setup-sockets setup-swagger-ui
 setup-frontend: setup-webapp-common setup-webapp-mobile
+
+
+$(deps):
+	@(which $@ >/dev/null 2>&1 && echo -e "$@ \xE2\x9C\x93") || echo -e "$@ \xE2\x9C\x95"
+
+check-deps: $(deps)
 
 # update
 #
@@ -121,15 +131,7 @@ swagger-ui: swagger-$(swagger_version).tar.gz
 	@mv swagger-ui-$(swagger_version) swagger-ui/swagger
 	@cd swagger-ui/swagger/dist && patch -p0 < ../../../swagger-ui.patch
 
-# check-deps
-#
-# rudimentary check to see if we have the system deps we need
-# ... not very sophisticated for now
-check-deps:
-	@echo && echo "# $@" && echo
-	@(which psql >/dev/null && echo 'postgres found') || echo 'postgres missing'
-	@(which redis-server >/dev/null && echo 'redis-server found') || echo 'redis-server missing'
-	@(which elasticsearch >/dev/null && echo 'elasticsearch found') || echo 'elasticsearch missing'
+
 
 # ensure each project folder is available or check it out if not
 $(project_dirs):
