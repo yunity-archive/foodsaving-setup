@@ -185,10 +185,14 @@ disconnect-db-sessions:
 recreate-db: | disconnect-db-sessions drop-db init-db
 	@echo && echo "# $@" && echo
 
+yunity-core/base/migrations:
+	@echo && echo "# $@" && echo
+	@cd yunity-core && env/bin/python manage.py makeallmigrations 
+
 # migate-db
 #
 # run django migrations
-migrate-db: yunity-core/env yunity-core/config/local_settings.py init-db
+migrate-db: yunity-core/env yunity-core/config/local_settings.py init-db yunity-core/base/migrations
 	@echo && echo "# $@" && echo
 	@cd yunity-core && env/bin/python manage.py migrate
 
