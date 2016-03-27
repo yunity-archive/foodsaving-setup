@@ -6,11 +6,7 @@
     },
     {
       "name": "mobile",
-      "script": "node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-      "args": [
-        "--port", "8084",
-        "--inline"
-      ],
+      "script": "scripts/dev-server.sh",
       "cwd": "yunity-webapp-mobile"
     },
     {
