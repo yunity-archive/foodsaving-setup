@@ -6,7 +6,10 @@
     },
     {
       "name": "mobile",
-      "script": "scripts/dev-server.sh",
+      "script": "npm",
+      "args": [
+        "run", "dev-server"
+      ],
       "cwd": "yunity-webapp-mobile"
     },
     {
