@@ -59,6 +59,14 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-get update && sudo apt-get install postgresql-9.4 postgresql-server-dev-9.4
 ```
 
+### OpenSUSE Leap
+
+All packages should be available in the default repositories `repo-oss` and `repo-non-oss`.
+
+```sh
+sudo zypper install python-virtualenv postgresql-devel postgresql python-redis redis npm
+```
+
 ### Archlinux
 
 All packages can be obtained from core, extra or community repositories. When queried, chose to install all packets out of base-devel.
@@ -175,7 +183,7 @@ You should end up with the following services running:
 Name    | URL                                                                       | Purpose
 --------|---------------------------------------------------------------------------|--------------------------------
 proxy   | see table above | frontend server to serve for all endpoints (would be nginx in production)
-web     | [localhost:8083](http://localhost:8083)                                   | webpack-dev-server serving up webapp  
+web     | [localhost:8083](http://localhost:8083)                                   | webpack-dev-server serving up webapp
 mobile  | [localhost:8084](http://localhost:8084)                                   | webpack-dev-server serving up webapp mobile
 sockets | [localhost:8080](http://localhost:8080) (socket.io) and [localhost:9080](http://localhost:9080) (admin api)   | nodejs/socket.io server managing socket.io connections from frontends
 django  | [localhost:8000](http://localhost:8000)                                   | django application
@@ -228,21 +236,4 @@ If you're using virtualenvwrapper or just want your virtualenv to be in a specia
 cd yunity-core
 rm -rf env # if present
 ln -s ~/.envs/yunity-core env
-```
-
-## Errors
-
-You might have this error with django/python/crossbar:
-
-```sh
-crossbar-3 (err): pkg_resources.DistributionNotFound: The 'cryptography>=0.7' distribution was not found and is required by pyOpenSSL
-```
-
-if you get this kind of error message go into the yunity-core repository and force reinstall the requirements
-
-
-```sh
-cd yunity-core
-./env/bin/pip install --force-reinstall --ignore-installed -r requirements.pip
-pm2 restart all
 ```
