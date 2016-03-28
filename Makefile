@@ -33,11 +33,11 @@ deps := wget git postgres redis-server virtualenv node npm
 
 # all yunity-* projects
 
-frontend_project_dirs = yunity-webapp-common yunity-webapp-mobile
+frontend_project_dirs = yunity-webapp-mobile
 backend_project_dirs = yunity-core yunity-sockets
 project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 
-.PHONY: setup update setup-core setup-sockets setup-webapp-common setup-webapp setup-webapp-mobile git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps $(deps)
+.PHONY: setup update setup-core setup-sockets setup-webapp-mobile git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps $(deps)
 
 # setup
 #
@@ -48,7 +48,7 @@ project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 setup: setup-backend setup-frontend
 
 setup-backend: setup-core setup-sockets setup-swagger-ui
-setup-frontend: setup-webapp-common setup-webapp-mobile
+setup-frontend: setup-webapp-mobile
 
 
 $(deps):
@@ -85,27 +85,10 @@ setup-sockets: | yunity-sockets npm-system-deps
 	@echo && echo "# $@" && echo
 	@cd yunity-sockets && npm-cache install npm --unsafe-perm
 
-setup-webapp-common: | yunity-webapp-common npm-deps npm-system-deps
-	@echo && echo "# $@" && echo
-	@cd yunity-webapp-common && npm-cache install npm
-
-setup-webapp: | yunity-webapp-common yunity-webapp npm-deps npm-system-deps
-	@echo && echo "# $@" && echo
-	@cd yunity-webapp && npm-cache install npm --unsafe-perm
-	@cd yunity-webapp && npm-cache install bower --allow-root
-	@rm -rf yunity-webapp/node_modules/yunity-webapp-common
-	@cd yunity-webapp/node_modules && ln -s ../../yunity-webapp-common .
-	#@cd yunity-webapp && $$(npm bin)/webpack
-
-build-webapp:
-	@cd yunity-webapp && $$(npm bin)/webpack
-
-setup-webapp-mobile: | yunity-webapp-common yunity-webapp-mobile npm-deps npm-system-deps
+setup-webapp-mobile: | yunity-webapp-mobile npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
 	@cd yunity-webapp-mobile && npm-cache install npm --unsafe-perm
 	@cd yunity-webapp-mobile && npm-cache install bower --allow-root
-	@rm -rf yunity-webapp-mobile/node_modules/yunity-webapp-common
-	@cd yunity-webapp-mobile/node_modules && ln -s ../../yunity-webapp-common .
 
 build-webapp-mobile:
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
