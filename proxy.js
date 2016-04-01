@@ -31,9 +31,10 @@ var proxy = httpProxy.createProxyServer({});
 var sites = [
   // not working on the app app for now
   //{ name: 'web app',            url: WEBAPP_URL },
-  { name: 'mobile web app',     url: MOBILE_URL },
-  { name: 'swagger',            url: MOBILE_URL + 'swagger' },
-  { name: 'socket connections', url: SOCKET_CONNECTION_VIEW_URL }
+  { name: 'mobile web app',        url: MOBILE_URL },
+  { name: 'swagger',               url: MOBILE_URL + 'swagger' },
+  { name: 'socket connections',    url: SOCKET_CONNECTION_VIEW_URL },
+  { name: 'angular material docs', url: 'https://material.angularjs.org/1.0.6/' }
 ];
 
 /*
@@ -87,7 +88,18 @@ http.createServer(function(req, res){
       res.writeHead(200, {
         'Content-Type': 'text/html'
       });
-      processed = tpl(data, {sites : sites, host: host});
+      processed = tpl(data, {
+        sites: sites.map(function(site){
+          site = clone(site);
+          if (/^http/.test(site.url)) {
+            site.href = site.url;
+          } else {
+            site.href = host + site.url;
+          }
+          return site;
+        })
+      });
+      console.log('processed template is', processed);
       res.write(processed, 'utf8');
       res.end();
     }
@@ -151,4 +163,12 @@ function createHttpServerFor(backendServer) {
   });
 
   return server;
+}
+
+function clone(src) {
+  var dst = {};
+  Object.keys(src).forEach(function(key){
+    dst[key] = src[key];
+  });
+  return dst;
 }
