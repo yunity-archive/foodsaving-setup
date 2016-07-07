@@ -32,9 +32,9 @@ var sites = [
   // not working on the app app for now
   //{ name: 'web app',            url: WEBAPP_URL },
   { name: 'mobile web app',        url: MOBILE_URL },
-  { name: 'swagger',               url: MOBILE_URL + 'swagger' },
   { name: 'socket connections',    url: SOCKET_CONNECTION_VIEW_URL },
-  { name: 'angular material docs', url: 'https://material.angularjs.org/1.0.6/' }
+  { name: 'angular material docs', url: 'https://material.angularjs.org/1.0.6/' },
+  { name: 'swagger',               url: DJANGO_BACKEND + '/docs/', external: true }
 ];
 
 /*
@@ -95,6 +95,12 @@ http.createServer(function(req, res){
             site.href = site.url;
           } else {
             site.href = host + site.url;
+          }
+          if (site.external) {
+            site.target = '_blank';
+            site.name = site.name + ' (external)';
+          } else {
+            site.target = 'aniceiframe';
           }
           return site;
         })

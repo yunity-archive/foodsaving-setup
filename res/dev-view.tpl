@@ -52,7 +52,7 @@ li>span {
   <li><span>yunity dev</span></li>
   <% for (site of sites) { %>
     <li>
-      <a href="<% site.href %>" target="aniceiframe">
+      <a href="<% site.href %>" target="<% site.target %>">
         <% site.name %>
       </a>
     </li>
