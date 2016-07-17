@@ -1,7 +1,6 @@
 var http = require('http');
 var httpProxy = require('http-proxy');
 var connect = require('connect');
-var serveStatic = require('serve-static');
 var fs = require('fs');
 var tpl = require('./TemplateEngine.js');
 
