@@ -8,8 +8,6 @@ db_name = yunity-database
 db_test_name = test_yunity-database
 db_password = yunity
 
-swagger_version = 2.1.3
-
 # $(1) will be replaced with a postgres tool (psql|createuser|createdb)
 # you can override this in local_settings.make so make it use "sudo -u ", etc....
 
@@ -47,7 +45,7 @@ project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 # runs all the npm/bower/pip/django/migation steps
 setup: setup-backend setup-frontend
 
-setup-backend: setup-core setup-sockets setup-swagger-ui
+setup-backend: setup-core setup-sockets
 setup-frontend: setup-webapp-mobile
 
 
@@ -92,29 +90,6 @@ setup-webapp-mobile: | yunity-webapp-mobile npm-deps npm-system-deps
 
 build-webapp-mobile:
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
-
-# setup-swagger-ui
-#
-# delete existing one, and put a new one in
-# we use a custom swagger html page which
-#   1. prepopulates the url inside the page with the correct one
-#   2. adds django csrf headers to xhr requests
-setup-swagger-ui: | clean-swagger-ui swagger-ui
-	@cp index-yunity.html swagger-ui/swagger/dist/
-
-clean-swagger-ui:
-	@rm -rf swagger-ui
-
-swagger-$(swagger_version).tar.gz:
-	@wget https://github.com/swagger-api/swagger-ui/archive/v$(swagger_version).tar.gz -O swagger-$(swagger_version).tar.gz
-
-swagger-ui: swagger-$(swagger_version).tar.gz
-	@tar zxvf swagger-$(swagger_version).tar.gz
-	@mkdir -p swagger-ui
-	@mv swagger-ui-$(swagger_version) swagger-ui/swagger
-	@cd swagger-ui/swagger/dist && patch -p0 < ../../../swagger-ui.patch
-
-
 
 # ensure each project folder is available or check it out if not
 $(project_dirs):

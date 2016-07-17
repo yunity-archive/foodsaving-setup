@@ -16,9 +16,6 @@ var DJANGO_BACKEND = 'http://localhost:8000';
 var SOCKETIO_SERVER = 'http://localhost:8080';
 var WEBAPP_SERVER = 'http://localhost:8083';
 var MOBILE_SERVER = 'http://localhost:8084';
-var SWAGGER_SERVER = 'http://localhost:' + SWAGGER_PORT;
-
-var SWAGGER_PATH = '/swagger/dist/index-yunity.html';
 
 var WEBAPP_URL = ':' + WEBAPP_PORT + '/';
 var MOBILE_URL = ':' + MOBILE_PORT + '/';
@@ -55,19 +52,6 @@ var sites = [
 */
 
 createHttpServerFor(MOBILE_SERVER).listen(MOBILE_PORT);
-
-/*
-
-  swagger ui
-  ---------------------------------------------------
-
-*/
-
-var swagger = connect();
-var swaggerBase = __dirname + '/swagger-ui/';
-console.log('serving swagger files from', swaggerBase);
-swagger.use(serveStatic(swaggerBase));
-swagger.listen(SWAGGER_PORT);
 
 /*
 
@@ -150,10 +134,6 @@ function createHttpServerFor(backendServer) {
     } else if (SOCKETIO_PATH_RE.test(req.url)) {
       // socket.io
       proxy.web(req, res, { target: SOCKETIO_SERVER });
-    } else if (req.url === '/swagger') {
-      redirect(res, SWAGGER_PATH);
-    } else if (/^\/swagger\//.test(req.url)) {
-      proxy.web(req, res, { target: SWAGGER_SERVER });
     } else {
       proxy.web(req, res, { target: backendServer });
     }
