@@ -42,7 +42,7 @@ project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 # ensures all the source code for the projects is available
 #  (will check it out if not)
 # ensures database and users are created
-# runs all the npm/bower/pip/django/migation steps
+# runs all the npm/pip/django/migation steps
 setup: setup-backend setup-frontend
 
 setup-backend: setup-core setup-sockets
@@ -81,12 +81,11 @@ setup-core: | yunity-core init-db pip-install migrate-db
 
 setup-sockets: | yunity-sockets npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-sockets && npm-cache install npm --unsafe-perm
+	@cd yunity-sockets && npm install
 
 setup-webapp-mobile: | yunity-webapp-mobile npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-webapp-mobile && npm-cache install npm --unsafe-perm
-	@cd yunity-webapp-mobile && npm-cache install bower --allow-root
+	@cd yunity-webapp-mobile && npm install
 
 build-webapp-mobile:
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
@@ -172,8 +171,6 @@ yunity-core/env:
 # system-wide npm deps (TODO(ns) make nothing depend on global npm modules)
 npm-system-deps:
 	@echo && echo "# $@" && echo
-	@which npm-cache || sudo npm install -g npm-cache
-	@which bower || sudo npm install -g bower
 	@which pm2 || sudo npm install -g pm2
 
 # npm-deps
@@ -182,4 +179,4 @@ npm-system-deps:
 # mostly stuff for proxy.js...
 npm-deps:
 	@echo && echo "# $@" && echo
-	@npm-cache install npm --unsafe-perm
+	@npm install
