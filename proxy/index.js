@@ -60,7 +60,7 @@ createHttpServerFor(MOBILE_SERVER).listen(MOBILE_PORT);
 */
 
 http.createServer(function(req, res){
-  fs.readFile('res/dev-view.tpl', 'utf8', function(err, data){
+  fs.readFile(__dirname + '/dev-view.tpl', 'utf8', function(err, data){
     if(err) {
       console.log('error reading dev view template');
       res.writeHead(500);
@@ -88,7 +88,6 @@ http.createServer(function(req, res){
           return site;
         })
       });
-      console.log('processed template is', processed);
       res.write(processed, 'utf8');
       res.end();
     }
