@@ -21,7 +21,6 @@ In this section we will install the following dependencies:
 - node/npm (should work with 0.12.x and 4.x)
 - postgresql >=9.4
 - redis-server
-- elasticsearch
 
 You can check __some__ of the dependencies are present with:
 
@@ -33,7 +32,7 @@ make check-deps
 As yunity requires relatively recent versions of some packages, using Ubuntu 15.10 or greater is recommended.
 
 ```sh
-sudo apt-get install git redis-server elasticsearch python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
+sudo apt-get install git redis-server python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
 ```
 
 Node.js has to be installed independently. See  [these instructions](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
