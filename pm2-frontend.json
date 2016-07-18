@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "proxy",
-      "script": "proxy.js"
+      "script": "proxy/index.js"
     },
     {
       "name": "mobile",
