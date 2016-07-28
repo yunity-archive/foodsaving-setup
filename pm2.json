@@ -13,6 +13,14 @@
       "cwd": "yunity-webapp-mobile"
     },
     {
+      "name": "frontend",
+      "script": "npm",
+      "args": [
+        "run", "dev"
+      ],
+      "cwd": "yunity-angular"
+    },
+    {
       "name": "sockets",
       "script": "index.js",
       "args": [

@@ -31,7 +31,7 @@ deps := wget git postgres redis-server virtualenv node npm
 
 # all yunity-* projects
 
-frontend_project_dirs = yunity-webapp-mobile
+frontend_project_dirs = yunity-webapp-mobile yunity-angular
 backend_project_dirs = yunity-core yunity-sockets
 project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 
@@ -46,7 +46,7 @@ project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 setup: setup-backend setup-frontend
 
 setup-backend: setup-core setup-sockets
-setup-frontend: setup-webapp-mobile
+setup-frontend: setup-webapp-mobile setup-angular
 
 
 $(deps):
@@ -89,6 +89,13 @@ setup-webapp-mobile: | yunity-webapp-mobile npm-deps npm-system-deps
 
 build-webapp-mobile:
 	@cd yunity-webapp-mobile && $$(npm bin)/webpack
+
+setup-angular: | yunity-angular npm-deps npm-system-deps
+	@echo && echo "# $@" && echo
+	@cd yunity-angular && npm install
+
+build-angular:
+	@cd yunity-angular && $$(npm bin)/gulp webpack
 
 # ensure each project folder is available or check it out if not
 $(project_dirs):

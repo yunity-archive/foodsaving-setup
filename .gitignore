@@ -5,6 +5,7 @@ yunity-webapp-mobile
 yunity-webapp
 yunity-webapp-common
 yunity-sockets
+yunity-angular
 local_settings.make
 swagger-ui
 swagger*.tar.gz
