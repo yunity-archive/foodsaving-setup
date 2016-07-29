@@ -19,6 +19,7 @@ var MOBILE_SERVER = 'http://localhost:8084';
 var WEBAPP_URL = ':' + WEBAPP_PORT + '/';
 var MOBILE_URL = ':' + MOBILE_PORT + '/';
 var SOCKET_CONNECTION_VIEW_URL = ':9080/';
+var ANGULAR_URL = 'http://localhost:3000';
 
 var proxy = httpProxy.createProxyServer({});
 
@@ -28,6 +29,7 @@ var sites = [
   // not working on the app app for now
   //{ name: 'web app',            url: WEBAPP_URL },
   { name: 'mobile web app',        url: MOBILE_URL },
+  { name: 'angular frontend',      url: ANGULAR_URL },
   { name: 'socket connections',    url: SOCKET_CONNECTION_VIEW_URL },
   { name: 'angular material docs', url: 'https://material.angularjs.org/1.0.6/' },
   { name: 'swagger',               url: DJANGO_BACKEND + '/docs/', external: true }
