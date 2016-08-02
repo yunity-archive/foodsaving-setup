@@ -86,14 +86,14 @@ initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
 By default, archlinux does not start the installed services.
 
 ```sh
-sudo systemctl start postgres.service
+sudo systemctl start postgresql.service
 sudo systemctl start redis.service
 ```
 
 You can add them to autostart as well:
 
 ```sh
-sudo systemctl enable postgres.service
+sudo systemctl enable postgresql.service
 sudo systemctl enable redis.service
 ```
 
