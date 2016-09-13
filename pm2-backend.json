@@ -7,7 +7,7 @@
         "-w", "8080",
         "-p", "9080"
       ],
-      "cwd": "yunity-sockets"
+      "cwd": "foodsaving-sockets"
     },
     {
       "name": "django",
@@ -19,7 +19,7 @@
       ],
       "exec_interpreter": "env/bin/python",
       "exec_mode": "fork_mode",
-      "cwd": "yunity-core"
+      "cwd": "foodsaving-backend"
     }
   ]
 }

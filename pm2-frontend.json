@@ -5,21 +5,12 @@
       "script": "proxy/index.js"
     },
     {
-      "name": "mobile",
-      "script": "node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-      "args": [
-        "--port", "8084",
-        "--inline"
-      ],
-      "cwd": "yunity-webapp-mobile"
-    },
-    {
       "name": "frontend",
       "script": "npm",
       "args": [
         "run", "dev"
       ],
-      "cwd": "yunity-angular"
+      "cwd": "foodsaving-frontend"
     }
   ]
 }

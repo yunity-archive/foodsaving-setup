@@ -7,17 +7,11 @@ var tpl = require('./TemplateEngine.js');
 var SOCKETIO_PATH_RE = /^\/socket\//;
 
 var SWAGGER_PORT = 9000;
-var WEBAPP_PORT = 8090;
-var MOBILE_PORT = 8091;
 var DEV_PORT = 5000;
 
 var DJANGO_BACKEND = 'http://localhost:8000';
 var SOCKETIO_SERVER = 'http://localhost:8080';
-var WEBAPP_SERVER = 'http://localhost:8083';
-var MOBILE_SERVER = 'http://localhost:8084';
 
-var WEBAPP_URL = ':' + WEBAPP_PORT + '/';
-var MOBILE_URL = ':' + MOBILE_PORT + '/';
 var SOCKET_CONNECTION_VIEW_URL = ':9080/';
 var ANGULAR_URL = 'http://localhost:3000';
 
@@ -26,33 +20,11 @@ var proxy = httpProxy.createProxyServer({});
 /* these sites will be shown on the top bar of the admin/dev site */
 
 var sites = [
-  // not working on the app app for now
-  //{ name: 'web app',            url: WEBAPP_URL },
-  { name: 'mobile web app',        url: MOBILE_URL },
   { name: 'angular frontend',      url: ANGULAR_URL },
   { name: 'socket connections',    url: SOCKET_CONNECTION_VIEW_URL },
   { name: 'angular material docs', url: 'https://material.angularjs.org/1.0.6/' },
   { name: 'swagger',               url: DJANGO_BACKEND + '/docs/', external: true }
 ];
-
-/*
-
-  proxy server for website
-  ---------------------------------------------------
-
-*/
-
-// removed because we are not working on it right now
-//createHttpServerFor(WEBAPP_SERVER).listen(WEBAPP_PORT);
-
-/*
-
-  proxy server for mobile website
-  ---------------------------------------------------
-
-*/
-
-createHttpServerFor(MOBILE_SERVER).listen(MOBILE_PORT);
 
 /*
 

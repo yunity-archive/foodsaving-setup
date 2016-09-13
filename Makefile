@@ -29,13 +29,11 @@ git_url_base = https://github.com/yunity/
 
 deps := wget git postgres redis-server virtualenv node npm
 
-# all yunity-* projects
-
-frontend_project_dirs = yunity-webapp-mobile yunity-angular
-backend_project_dirs = yunity-core yunity-sockets
+frontend_project_dirs = foodsaving-frontend
+backend_project_dirs = foodsaving-core foodsaving-sockets
 project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 
-.PHONY: setup update setup-core setup-sockets setup-webapp-mobile git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps $(deps)
+.PHONY: setup update setup-core setup-sockets git-pull-frontend git-pull-backend pip-install migrate-db init-db check-deps $(deps)
 
 # setup
 #
@@ -46,8 +44,6 @@ project_dirs = $(frontend_project_dirs) $(backend_project_dirs)
 setup: setup-backend setup-frontend
 
 setup-backend: setup-core setup-sockets
-setup-frontend: setup-webapp-mobile setup-angular
-
 
 $(deps):
 	@(which $@ >/dev/null 2>&1 && echo -e "$@ \xE2\x9C\x93") || echo -e "$@ \xE2\x9C\x95"
@@ -77,25 +73,18 @@ update-frontend:
 	@git pull
 	@make git-pull-frontend setup-frontend
 
-setup-core: | yunity-core init-db pip-install migrate-db
+setup-core: | foodsaving-backend init-db pip-install migrate-db
 
-setup-sockets: | yunity-sockets npm-system-deps
+setup-sockets: | foodsaving-sockets npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-sockets && npm install
+	@cd foodsaving-sockets && npm install
 
-setup-webapp-mobile: | yunity-webapp-mobile npm-deps npm-system-deps
+setup-frontend: | foodsaving-frontend npm-deps npm-system-deps
 	@echo && echo "# $@" && echo
-	@cd yunity-webapp-mobile && npm install
+	@cd foodsaving-frontend && npm install
 
-build-webapp-mobile:
-	@cd yunity-webapp-mobile && $$(npm bin)/webpack
-
-setup-angular: | yunity-angular npm-deps npm-system-deps
-	@echo && echo "# $@" && echo
-	@cd yunity-angular && npm install
-
-build-angular:
-	@cd yunity-angular && $$(npm bin)/gulp webpack
+build-frontend:
+	@cd foodsaving-frontend && $$(npm bin)/gulp webpack
 
 # ensure each project folder is available or check it out if not
 $(project_dirs):
@@ -152,24 +141,24 @@ recreate-db: | disconnect-db-sessions drop-db init-db
 # migate-db
 #
 # run django migrations
-migrate-db: yunity-core/env yunity-core/config/local_settings.py init-db
+migrate-db: foodsaving-backend/env foodsaving-backend/config/local_settings.py init-db
 	@echo && echo "# $@" && echo
-	@cd yunity-core && env/bin/python manage.py migrate
+	@cd foodsaving-backend && env/bin/python manage.py migrate
 
 # copy default dev local_settings.py with db details for django
-yunity-core/config/local_settings.py:
+foodsaving-backend/config/local_settings.py:
 	@echo && echo "# $@" && echo
-	@cp local_settings.py.dev-default yunity-core/config/local_settings.py
+	@cp local_settings.py.dev-default foodsaving-backend/config/local_settings.py
 
 # pip install env
-pip-install: yunity-core/env
+pip-install: foodsaving-backend/env
 	@echo && echo "# $@" && echo
-	@cd yunity-core && env/bin/pip install -r requirements.txt
+	@cd foodsaving-backend && env/bin/pip install -r requirements.txt
 
 # virtualenv initialization
-yunity-core/env:
+foodsaving-backend/env:
 	@echo && echo "# $@" && echo
-	@virtualenv --python=python3 --no-site-packages yunity-core/env
+	@virtualenv --python=python3 --no-site-packages foodsaving-backend/env
 
 # system-wide npm deps (TODO(ns) make nothing depend on global npm modules)
 npm-system-deps:
@@ -178,7 +167,7 @@ npm-system-deps:
 
 # npm-deps
 #
-# install some npm stuff for the yunity-setup project
+# install some npm stuff for the foodsaving-setup project
 # mostly stuff for proxy.js...
 npm-deps:
 	@echo && echo "# $@" && echo
