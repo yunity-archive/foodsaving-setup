@@ -9,10 +9,7 @@ It helps you to:
 - setup the database and run the migrations
 - run/manage the application's processes using pm2
 
-The app is split into frontend and backend parts. You can either:
-
-1. run everything locally on your machine
-2. run the backend in a vagrant vm and run the frontend locally (Note: the app is in heavy development right now, so this might not work)
+The app is split into frontend and backend parts. You can run everything locally on your machine.
 
 ## Install system deps
 
@@ -123,33 +120,6 @@ To update everything later on, run:
 make update
 ```
 
-## Quick start (with vagrant backend)
-
-Note: the app is in heavy development right now, so this might not work.
-
-```sh
-git clone https://github.com/yunity/yunity-setup.git yunity
-cd yunity
-vagrant box add yunity-backend http://p12607.ngcobalt20.manitu.net/download.php?file=yunity-backend-1.0.box
-vagrant up
-make setup-frontend
-pm2 start pm2-frontend.json
-```
-
-Then visit [localhost:5000](http://localhost:5000) to access all the things.
-
-To update the frontend later on, run:
-
-```
-make update-frontend
-```
-
-... and the backend (inside the vagrant box), run:
-
-```
-vagrant ssh -- ./update
-```
-
 ## Endpoints
 
 The proxy serves up the following endpoints you can visit, these are the more useful ones:
@@ -219,7 +189,7 @@ pg       | How to run pg commands (psql,createdb,createuser) `$(1)` is replaced 
 Some OSes postgres package will require you to use `sudo` to become the `postgres` user. You can change this by modifying your `pg_hba.conf` file to include
 an entry something like this:
 
-```
+```v
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 local   all             all                                     trust
 ```
