@@ -1,4 +1,4 @@
-# yunity-setup
+# foodsaving-setup
 
 This provides scripts to get the app up and running. The primary purpose is for developers to get up and running easily. Please create an issue if this doesn't work out the box for you, it's a work in progress :)
 
@@ -26,7 +26,7 @@ make check-deps
 ```
 
 ### Ubuntu / Debian
-As yunity requires relatively recent versions of some packages, using Ubuntu 15.10 or greater is recommended.
+As the foodsaving tool requires relatively recent versions of some packages, using Ubuntu 15.10 or greater is recommended.
 
 ```sh
 sudo apt-get install git redis-server python3 python3-dev python-virtualenv postgresql postgresql-server-dev-9.4 gcc build-essential g++ libffi-dev libncurses5-dev
@@ -106,8 +106,8 @@ fsync = off
 ## Quick start (everything local)
 
 ```sh
-git clone https://github.com/yunity/yunity-setup.git yunity
-cd yunity
+git clone https://github.com/yunity/foodsaving-setup.git foodsaving-tool
+cd foodsaving-tool
 make
 pm2 start pm2.json
 ```
@@ -133,16 +133,16 @@ URL                                                          | Purpose
 [localhost:9080](http://localhost:9080)                      | see who is connected to the sockets app
 
 
-... and some exra endpoints if you're interested:
+... and some extra endpoints if you're interested:
 
 
 URL                                                          | Purpose
 -------------------------------------------------------------|----------------------------------------------
-[localhost:8091/socket](http://localhost:8090/socket/)       | yunity-sockets socket.io endpoint
+[localhost:8091/socket](http://localhost:8090/socket/)       | foodsaving-sockets socket.io endpoint
 [localhost:8091/socket.io](http://localhost:8090/socket.io/) | webapp webpack-dev-server socket.io endpoint
 [localhost:8091/swagger](http://localhost:8091/swagger)      | swagger docs
 [localhost:8091/api](http://localhost:8091/api/)             | django api endpoint
-[localhost:8091/socket](http://localhost:8091/socket/)       | yunity-sockets socket.io endpoint
+[localhost:8091/socket](http://localhost:8091/socket/)       | foodsaving-sockets socket.io endpoint
 [localhost:8091/socket.io](http://localhost:8091/socket.io/) | mobile webapp webpack-dev-server socket.io endpoint
 
 
@@ -151,8 +151,6 @@ You should end up with the following services running:
 Name    | URL                                                                       | Purpose
 --------|---------------------------------------------------------------------------|--------------------------------
 proxy   | see table above | frontend server to serve for all endpoints (would be nginx in production)
-web     | [localhost:8083](http://localhost:8083)                                   | webpack-dev-server serving up webapp
-mobile  | [localhost:8084](http://localhost:8084)                                   | webpack-dev-server serving up webapp mobile
 sockets | [localhost:8080](http://localhost:8080) (socket.io) and [localhost:9080](http://localhost:9080) (admin api)   | nodejs/socket.io server managing socket.io connections from frontends
 django  | [localhost:8000](http://localhost:8000)                                   | django application
 
@@ -166,13 +164,6 @@ pm2 list
 
 ```sh
 pm2 stop django
-```
-
-## Add git hook to update common files automatically
-
-```sh
-cp ./yunity-webapp-common/scripts/post-merge ./.git/modules/yunity-webapp-common/hooks/
-chmod +x ./.git/modules/yunity-webapp-common/hooks/post-merge
 ```
 
 ## Custom settings
@@ -201,7 +192,7 @@ local   all             all                                     trust
 If you're using virtualenvwrapper or just want your virtualenv to be in a special location, first create a symlink and it will use that one, e.g.:
 
 ```
-cd yunity-core
+cd foodsaving-backend
 rm -rf env # if present
-ln -s ~/.envs/yunity-core env
+ln -s ~/.envs/foodsaving-backend env
 ```
